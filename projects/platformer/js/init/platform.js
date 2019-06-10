@@ -41,7 +41,7 @@
         platform.create(100, 350, 5, 0.5)
         platform.create(100, 450, 5, 0.5);
         platform.create(100, 550, 5, 0.5);
-        platform.create(100, 0, 0.1, 18)
+        platform.create(100, 0, 0.1, 17)
         
         // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////

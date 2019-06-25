@@ -1,6 +1,7 @@
 var background = function (window) {
     'use strict';
     
+    
     window.opspark = window.opspark || {};
     var draw = window.opspark.draw;
     var createjs = window.createjs;
@@ -18,7 +19,10 @@ var background = function (window) {
 
         // container which will be returned
         var background;
-        
+        var buildings = [];
+        var tree;
+        var shape;
+        var building;
         // ANIMATION VARIABLES HERE:
         
         
@@ -34,17 +38,49 @@ var background = function (window) {
 
             // this fills the background with a obnoxious yellow
             // you should modify this to suit your game
-            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
+            var backgroundFill = draw.rect(canvasWidth,370,'black');
             background.addChild(backgroundFill);
             
+           
+            
+            
             // TODO: 3 - Add a moon and starfield
+            var shape = draw.bitmap('img/moon.png');
+            background.addChild(shape);
+             
+            shape.x = 1000;
+            shape.y = 50;
+            shape.scaleX = 0.5;
+            shape.scaleY = 0.5;
             
-            
+            var circle;
+        for(var i=0;i<100;i++) {
+            circle = draw.circle(10,'white','LightGray',2);
+            circle.x = canvasWidth*Math.random();
+            circle.y = groundY*Math.random();
+            background.addChild(circle);
+                }
+                    
             // TODO: 5 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             
+            var buildingHeight = 300;
+            var building;
+              for(var i=0;i<5;++i) {
+                 building = draw.rect(75,buildingHeight,'LightGray','Black',1);
+                 building.x = 200*i;
+                 building.y = groundY-buildingHeight;
+                 background.addChild(building);
+                 buildings.push(building);
+                 
+              }
+            
+
             
             // TODO 4: Part 1 - Add a tree
-            
+            tree = draw.bitmap('img/tree.png');
+            tree.x = 0;
+            tree.y = 100;
+            background.addChild(tree);
         }
         
         // Perform background animation
@@ -56,11 +92,18 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 4: Part 2 - Move the tree!
-            
-            
+            tree.x = tree.x - 2;
+            if(tree.x < -200) {
+             tree.x = canvasWidth;
+            }
             // TODO 5: Part 2 - Parallax
+            for ( var i = 0;i<buildings.length ;i++ ) {
+              buildings[i].x = buildings[i].x - 0.5; 
+            if(buildings[i].x < -200) {
+            buildings[i].x = canvasWidth;  
+            }
             
-
+}
         }
 
         background = new createjs.Container();

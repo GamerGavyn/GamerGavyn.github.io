@@ -4,7 +4,7 @@
     var physikz = window.opspark.racket.physikz;
     var draw = window.opspark.draw;
     var createjs = window.createjs;
-
+    
     window.opspark.createGameManager = function(app,hud) {
         var score = 0;
         var health = 100;
@@ -266,7 +266,7 @@
         function setDebugMode(debug) {
             debugMode = !!debug;
         }
-
+       
         return {
             increaseScore: increaseScore,
             getScore: getScore,

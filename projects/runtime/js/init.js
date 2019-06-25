@@ -32,8 +32,8 @@ var init = function (window) {
     ground = opspark.makeGround(app);
 
     // TODO 2 : add background
-
-    
+        var background = opspark.makeBackground(app,ground);
+        view.addChild(background);
     var help = draw.textfield('MOVES || up: jump | right: flying jump | down: duck | space: fire | q your mom!', 
         '20px Arial',
         '#ccc', 'left');
@@ -71,10 +71,14 @@ var init = function (window) {
     }
     
     // TODO 1 : add a heads-up display to game
+    var hud = opspark.makeHud();
+    view.addChild(hud);
+    window.hud = hud;
 
 
     // TODO 6 : create game manager
-
+    var game = opspark.createGameManager(app,hud);
+    opspark.runLevelInGame(game);
 
 };
 
@@ -84,3 +88,9 @@ if((typeof process !== 'undefined') &&
     // here, export any references you need for tests //
     module.exports = init;
 }
+
+//TODO 7: Create a hitzone for your first obstacle
+    //var hitZoneSize = 25;
+    //var damageFromObstacle = 10;
+    //var myObstacle = game.createObstacle(hitZoneSize,damageFromObstacle);
+    

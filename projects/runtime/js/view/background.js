@@ -38,24 +38,24 @@ var background = function (window) {
 
             // this fills the background with a obnoxious yellow
             // you should modify this to suit your game
-            var backgroundFill = draw.rect(canvasWidth,370,'black');
+            var backgroundFill =draw.bitmap('img/windows.jpg');
             background.addChild(backgroundFill);
             
            
             
             
             // TODO: 3 - Add a moon and starfield
-            var shape = draw.bitmap('img/moon.png');
+            var shape = draw.bitmap('img/sunn.png');
             background.addChild(shape);
              
             shape.x = 1000;
-            shape.y = 50;
+            shape.y = 40;
             shape.scaleX = 0.5;
             shape.scaleY = 0.5;
             
             var circle;
         for(var i=0;i<100;i++) {
-            circle = draw.circle(10,'white','LightGray',2);
+            circle = draw.circle(10,'yellow','LightGray',2);
             circle.x = canvasWidth*Math.random();
             circle.y = groundY*Math.random();
             background.addChild(circle);

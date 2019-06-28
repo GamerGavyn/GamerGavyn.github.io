@@ -5,9 +5,11 @@ var level01 = function(window) {
     var draw = window.opspark.draw;
     var createjs = window.createjs;
 
-    window.opspark.runLevelInGame = function(game) {
+    window.opspark.runLevelInGame = function(game, canvas) {
         // some useful constants 
         var groundY = game.groundY;
+        
+        console.log(game);
 
         // this data will allow us to define all of the
         // behavior of our game
@@ -16,18 +18,24 @@ var level01 = function(window) {
             number: 1,
             speed: -3,
             gameItems: [
-                { type: 'sawblade', x: 1700, y: groundY },
-                { type: 'sawblade', x: 1200, y: groundY },
-                { type: 'sawblade', x: 2000, y: groundY },
-                {type: 'box',x:1500,y:270},
-                {type: "enemy",x:400, y:groundY-30},
-                {type:"enemy", x:800,y:groundY-125},
-                {type: "enemy",x:1200,y:groundY-50},
+                { type: 'sawblade', x: canvas.width + 1700, y: groundY },
+                { type: 'sawblade', x: canvas.width + 1200, y: groundY },
+                { type: 'sawblade', x: canvas.width + 2000, y: groundY },
+                {type: 'box',x: canvas.width + 1500,y:groundY -100},
+                {type: "enemy",x: canvas.width + 400, y:groundY-30},
+                {type:"enemy", x: canvas.width + 800,y:groundY-125},
+                {type: "enemy",x: canvas.width + 1200,y:groundY-50},
             ]
         };
     //     createEnemy(400, groundY-30);
     //  createEnemy(800, groundY-125 );
     //  createEnemy(1200, groundY-50);
+    
+        setInterval(procedurallyGenerateItem, 15 * 1000);
+        
+        function procedurallyGenerateItem() {
+            initLevelData();
+        }
      
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
@@ -54,17 +62,18 @@ var level01 = function(window) {
         //your code goes here
 
         //TODO 9: Level Data
-        for (var i = 0; i < levelData.gameItems.length; i++) {
-            var gameItem = levelData.gameItems[i];
-            if ( gameItem.type ==="sawblade" ){
-                createSawBlade(gameItem.x, gameItem.y);
-            } else if (gameItem.type ==="enemy") {
-                 createEnemy(gameItem.x, gameItem.y);
-            }
-            else{
-            
-            
-                createBox(gameItem.x, gameItem.y);
+        initLevelData();
+        function initLevelData() {
+            for (var i = 0; i < levelData.gameItems.length; i++) {
+                var gameItem = levelData.gameItems[i];
+                if ( gameItem.type ==="sawblade" ){
+                    createSawBlade(gameItem.x, gameItem.y);
+                } else if (gameItem.type ==="enemy") {
+                     createEnemy(gameItem.x, gameItem.y);
+                }
+                else{
+                    createBox(gameItem.x, gameItem.y);
+                }
             }
         }
         // Create a sawblade using the .x and .y property of each game item object
@@ -93,7 +102,7 @@ var level01 = function(window) {
             function createEnemy(x, y) {
             //TODO 11: Enemies!
             var enemy =  game.createGameItem('enemy',25);
-            var redSquare = draw.rect(50,50,'red');
+            var redSquare = draw.bitmap('img/images.jpg');
             redSquare.x = -25;
             redSquare.y = -25;
             enemy.addChild(redSquare);
